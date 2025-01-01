@@ -1,7 +1,10 @@
+
+
+//a+bb
+
 #include <stdio.h>
 #include <string.h>
 
-// Function to check if the string matches the pattern a+bb
 int isValid(char str[]) {
     int i = 0;
     int size = strlen(str);
