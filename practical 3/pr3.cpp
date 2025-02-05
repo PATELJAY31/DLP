@@ -140,7 +140,7 @@ vector<Token> tokenize(string line) {
 }
 
 int main() {
-    ifstream file("file.c");
+    ifstream file("file1.c");
     if (!file) {
         cerr << "Error opening file.c" << endl;
         return 1;
