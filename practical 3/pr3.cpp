@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// Define token types
+
 enum TokenType {
     KEYWORD, IDENTIFIER, CONSTANT, OPERATOR, PUNCTUATION, STRING, UNKNOWN
 };
@@ -17,7 +17,7 @@ struct Token {
     TokenType type;
 };
 
-// List of C keywords
+
 const char* keywords[] = {"int", "float", "if", "else", "while", "return", "void", "main", "char"};
 const int keywordCount = 9;
 const char operators[] = "+-*/=<>!&|";
@@ -26,7 +26,7 @@ const char delimiters[] = ";(){}[],";
 unordered_set<string> symbolTable;
 vector<string> lexicalErrors;
 
-// Function to check if a string is a keyword
+
 bool isKeyword(const string &token) {
     for (int i = 0; i < keywordCount; i++) {
         if (token == keywords[i])
@@ -35,7 +35,7 @@ bool isKeyword(const string &token) {
     return false;
 }
 
-// Function to check if a character is an operator
+
 bool isOperator(char c) {
     for (char op : operators) {
         if (c == op)
@@ -44,7 +44,7 @@ bool isOperator(char c) {
     return false;
 }
 
-// Function to check if a character is a delimiter
+
 bool isDelimiter(char c) {
     for (char del : delimiters) {
         if (c == del)
@@ -53,12 +53,12 @@ bool isDelimiter(char c) {
     return false;
 }
 
-// Function to classify token
+
 TokenType getTokenType(const string &token) {
     if (isKeyword(token))
         return KEYWORD;
     if (isdigit(token[0])) {
-        // Check for invalid numeric literals
+        
         for (char c : token) {
             if (!isdigit(c)) {
                 lexicalErrors.push_back(token + " invalid lexeme");
@@ -68,7 +68,7 @@ TokenType getTokenType(const string &token) {
         return CONSTANT;
     }
     if (isalpha(token[0]) || token[0] == '_') {
-        if (token != "main") { // Exclude "main" from identifiers
+        if (token != "main") { 
             symbolTable.insert(token);
         }
         return IDENTIFIER;
@@ -76,7 +76,7 @@ TokenType getTokenType(const string &token) {
     return UNKNOWN;
 }
 
-// Function to tokenize a line, handling comments
+
 vector<Token> tokenize(string line) {
     vector<Token> tokens;
     string token;
@@ -86,12 +86,12 @@ vector<Token> tokenize(string line) {
 
     for (size_t i = 0; i < line.size(); i++) {
         if (inSingleLineComment) {
-            break; // Ignore the rest of the line
+            break; 
         }
         if (inMultiLineComment) {
             if (line[i] == '*' && i + 1 < line.size() && line[i + 1] == '/') {
                 inMultiLineComment = false;
-                i++; // Skip '*/'
+                i++; 
             }
             continue;
         }
