@@ -4,25 +4,29 @@
 #include <string.h>
 %}
 
-/* Regular definitions for token classes */
-KEYWORD      (int|char|return|void|if|else|while|for|break|continue)
-IDENTIFIER   [a-zA-Z_][a-zA-Z0-9_]*
-CONSTANT     [0-9]+|0[xX][0-9a-fA-F]+
-STRING       '([^\\']|\\.)*'|"([^\\"]|\\.)*"
-PUNCTUATION  [(){};,]
-OPERATOR     [=+\-*/%]
-COMMENT      \/\*([^*]|\*+[^/*])*\*+\/|\/\/.*
-WHITESPACE   [ \t\n]+
+/* Definitions */
+DIGIT       [0-9]
+LETTER      [a-zA-Z]
+IDENTIFIER  {LETTER}({LETTER}|{DIGIT})*
+CONSTANT    {DIGIT}+
+STRING      \"([^\"]|\\\")*\"
+CHARACTER   \'([^\']|\\\')\'
+KEYWORD     int|char|return|if|else|while|for|void
+OPERATOR    [=+\-*/%]
+PUNCTUATION [(){},;]
+COMMENT     \/\*([^*]|(\*+[^*/]))*\*+\/|\/\/.*
+WHITESPACE  [ \t\n]+
 
 %%
 {KEYWORD}      { printf("Keyword: %s\n", yytext); }
 {IDENTIFIER}   { printf("Identifier: %s\n", yytext); }
 {CONSTANT}     { printf("Constant: %s\n", yytext); }
 {STRING}       { printf("String: %s\n", yytext); }
-{PUNCTUATION}  { printf("Punctuation: %s\n", yytext); }
+{CHARACTER}    { printf("String: %s\n", yytext); }
 {OPERATOR}     { printf("Operator: %s\n", yytext); }
+{PUNCTUATION}  { printf("Punctuation: %s\n", yytext); }
 {COMMENT}      { /* Ignore comments */ }
-{WHITESPACE}   { /* Ignore whitespaces */ }
+{WHITESPACE}   { /* Ignore whitespace */ }
 .              { printf("Lexical Error: %s\n", yytext); }
 %%
 
