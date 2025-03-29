@@ -8,7 +8,7 @@ private:
     string input;
         int index;
 
-            // Function to match and consume the expected character
+            
                 bool match(char expected) {
                         if (index < input.length() && input[index] == expected) {
                                     index++;
@@ -17,7 +17,7 @@ private:
                                                                 return false;
                                                                     }
 
-                                                                        // S → ( L ) | a
+                                                                        
                                                                             bool S() {
                                                                                     if (match('a')) {
                                                                                                 return true;
@@ -29,7 +29,7 @@ private:
                                                                                                                                                                 return false;
                                                                                                                                                                     }
 
-                                                                                                                                                                        // L → S L'
+                                                                                                                                                                       
                                                                                                                                                                             bool L() {
                                                                                                                                                                                     if (S()) {
                                                                                                                                                                                                 return L_prime();
@@ -37,7 +37,7 @@ private:
                                                                                                                                                                                                                 return false;
                                                                                                                                                                                                                     }
 
-                                                                                                                                                                                                                        // L' → , S L' | ϵ
+                                                                                                                                                                                                                        
                                                                                                                                                                                                                             bool L_prime() {
                                                                                                                                                                                                                                     if (match(',')) {
                                                                                                                                                                                                                                                 if (S()) {
@@ -45,12 +45,12 @@ private:
                                                                                                                                                                                                                                                                             }
                                                                                                                                                                                                                                                                                         return false;
                                                                                                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                                                                                                        return true; // ϵ (empty) transition
+                                                                                                                                                                                                                                                                                                        return true; 
                                                                                                                                                                                                                                                                                                             }
 
                                                                                                                                                                                                                                                                                                             public:
                                                                                                                                                                                                                                                                                                                 RecursiveDescentParser(string str) {
-                                                                                                                                                                                                                                                                                                                        // Remove spaces and initialize index
+                                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                                                 input = "";
                                                                                                                                                                                                                                                                                                                                         for (char c : str) {
                                                                                                                                                                                                                                                                                                                                                     if (c != ' ') input += c;
@@ -58,7 +58,7 @@ private:
                                                                                                                                                                                                                                                                                                                                                                     index = 0;
                                                                                                                                                                                                                                                                                                                                                                         }
 
-                                                                                                                                                                                                                                                                                                                                                                            // Start parsing and ensure full consumption of input
+                                                                                                                                                                                                                                                                                                                                                                            
                                                                                                                                                                                                                                                                                                                                                                                 bool isValid() {
                                                                                                                                                                                                                                                                                                                                                                                         return S() && index == input.length();
                                                                                                                                                                                                                                                                                                                                                                                             }
